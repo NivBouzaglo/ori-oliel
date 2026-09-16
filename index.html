@@ -229,6 +229,14 @@
   .service-main{display:flex;flex-direction:column;gap:.3rem;}
   .service-main h3{font-size:1.375rem;font-weight:500;}
   .service-main small{color:var(--paper-faint);font-size:.875rem;}
+  .price-notice{
+    display:inline-flex;align-items:center;gap:.35rem;
+    margin-top:.55rem;padding:.3rem .65rem;
+    background:rgba(198,154,75,.12);border:1px solid var(--line-strong);
+    border-radius:99px;font-size:.75rem;font-weight:600;color:var(--brass-hi);
+    font-variant-numeric:tabular-nums;
+  }
+  .price-notice::before{content:"";width:.4rem;height:.4rem;border-radius:50%;background:currentColor;flex:none;}
   .service-leader{flex:1 1 auto;border-bottom:1px dotted var(--line-strong);margin-bottom:.5em;min-width:1.5rem;}
   .service-price{
     display:flex;align-items:baseline;gap:.5rem;flex:none;
@@ -707,13 +715,14 @@
       </div>
 
       <div class="services-list reveal-group">
-        <div class="service-row">
+        <div class="service-row" data-price-raise data-raise-date="2026-10-01T00:00:00+03:00" data-old-price="70" data-new-price="80">
           <div class="service-main">
             <h3>תספורת גבר</h3>
             <small>פייד, טאפר או עיצוב קלאסי — בהתאמה אישית</small>
+            <span class="price-notice" id="priceNotice" hidden></span>
           </div>
           <span class="service-leader"></span>
-          <div class="service-price"><b>70 ₪</b><span>30 דק׳</span></div>
+          <div class="service-price"><b id="haircutPrice">80 ₪</b><span>30 דק׳</span></div>
         </div>
 
         <div class="service-row">
@@ -758,7 +767,6 @@
         <div class="gallery-item"><img loading="lazy" src="images/g5.jpg" alt="עיצוב שיער ופייד באשדוד"></div>
         <div class="gallery-item"><img loading="lazy" src="images/g6.jpg" alt="תספורת בעבודת מספריים"></div>
         <div class="gallery-item"><img loading="lazy" src="images/g7.jpg" alt="תספורת גברים בסטייל אישי"></div>
-        <div class="gallery-item"><img loading="lazy" src="images/g8.jpg" alt="פייד נקי, אורי אוליאל"></div>
         <div class="gallery-item"><img loading="lazy" src="images/g9.jpg" alt="תוצאה סופית של תספורת גברים"></div>
       </div>
     </div>
@@ -1185,6 +1193,33 @@
       pill.textContent = isOpen ? 'פתוח עכשיו' : 'סגור כרגע';
       pill.classList.add(isOpen ? 'open' : 'closed');
     }
+  })();
+
+  // price-raise countdown — default markup already shows the post-raise price,
+  // so a JS failure never leaves a stale discounted price on screen; JS only
+  // temporarily overrides it back down while the raise is still upcoming
+  (function () {
+    const row = document.querySelector('[data-price-raise]');
+    const priceEl = document.getElementById('haircutPrice');
+    const noticeEl = document.getElementById('priceNotice');
+    if (!row || !priceEl || !noticeEl) return;
+
+    const raiseDate = new Date(row.dataset.raiseDate);
+    const oldPrice = row.dataset.oldPrice;
+    const newPrice = row.dataset.newPrice;
+    const now = new Date();
+
+    if (now >= raiseDate) return; // default markup is already correct
+
+    priceEl.textContent = oldPrice + ' ₪';
+
+    const msLeft = raiseDate - now;
+    const daysLeft = Math.max(1, Math.ceil(msLeft / (1000 * 60 * 60 * 24)));
+    const dayWord = daysLeft === 1 ? 'יום' : 'ימים';
+    const raiseDay = raiseDate.toLocaleDateString('he-IL', { day: 'numeric', month: 'numeric' });
+
+    noticeEl.textContent = 'המחיר עולה ל-' + newPrice + ' ₪ ב-' + raiseDay + ' · בעוד ' + daysLeft + ' ' + dayWord;
+    noticeEl.hidden = false;
   })();
 
   // scroll reveal, per section group — enhancement only; content is visible by default
