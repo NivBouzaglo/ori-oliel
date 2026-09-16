@@ -1,0 +1,1254 @@
+<title>אורי אוליאל</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Heebo:wght@300;400;500;600;700;800&display=swap');
+
+  :root{
+    --ink:#14100d;
+    --ink-soft:#1e1812;
+    --ink-elevated:#261e17;
+    --paper:#f1e6d3;
+    --paper-dim:rgba(241,230,211,.64);
+    --paper-faint:rgba(241,230,211,.4);
+    --brass:#c69a4b;
+    --brass-hi:#e7c481;
+    --brass-dim:rgba(198,154,75,.5);
+    --line:rgba(230,196,140,.16);
+    --line-strong:rgba(230,196,140,.28);
+    --ease-out:cubic-bezier(.23,1,.32,1);
+    --ease-in-out:cubic-bezier(.77,0,.175,1);
+    --ease-drawer:cubic-bezier(.32,.72,0,1);
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Heebo',Arial,sans-serif;
+    line-height:1.65;
+    direction:rtl;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Frank Ruhl Libre',"David Libre",serif;
+    margin:0;
+    text-wrap:balance;
+    font-weight:700;
+  }
+  p{margin:0;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{margin:0;padding:0;list-style:none;}
+  button{font:inherit;color:inherit;}
+  ::selection{background:var(--brass);color:var(--ink);}
+  :focus-visible{outline:2px solid var(--brass-hi);outline-offset:3px;border-radius:2px;}
+  @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth;}}
+
+  .container{
+    max-width:74rem;
+    margin-inline:auto;
+    padding-inline:clamp(1.25rem,5vw,3rem);
+  }
+  .section{padding-block:clamp(4rem,9vw,7.5rem);}
+  .section-head{
+    display:flex;
+    flex-direction:column;
+    gap:.75rem;
+    max-width:38rem;
+    margin-bottom:clamp(2.25rem,5vw,3.5rem);
+  }
+  .eyebrow{
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+    font-size:.8125rem;
+    font-weight:600;
+    letter-spacing:.06em;
+    color:var(--brass);
+  }
+  .eyebrow::before{
+    content:"";
+    width:1.5rem;
+    height:2px;
+    background:var(--brass);
+    flex:none;
+  }
+  .section-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);}
+  .section-head .lede{color:var(--paper-dim);font-size:1.0625rem;max-width:34rem;}
+
+  /* pole divider — a quiet nod to the barber pole stripe */
+  .pole-divider{
+    height:5px;
+    background:repeating-linear-gradient(
+      -45deg,
+      var(--brass) 0 10px,
+      transparent 10px 20px
+    );
+    opacity:.35;
+  }
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:fixed;
+    inset-inline:0;
+    top:0;
+    z-index:50;
+    padding-block:1.1rem;
+    transition:background 300ms var(--ease-out),padding-block 300ms var(--ease-out),border-color 300ms var(--ease-out);
+    border-bottom:1px solid transparent;
+  }
+  .nav.scrolled{
+    background:rgba(20,16,13,.86);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    padding-block:.75rem;
+    border-color:var(--line);
+  }
+  .nav .container{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+  .wordmark{font-family:'Frank Ruhl Libre',serif;font-size:1.25rem;font-weight:700;display:flex;align-items:baseline;gap:.4rem;}
+  .wordmark span{font-size:.6875rem;color:var(--brass-dim);font-family:'Heebo',sans-serif;letter-spacing:.08em;font-weight:600;}
+  .nav-links{display:flex;align-items:center;gap:1.75rem;}
+  .nav-links a:not(.btn){
+    font-size:.9375rem;
+    color:var(--paper-dim);
+    transition:color 160ms ease;
+  }
+  .nav-links a:not(.btn):hover{color:var(--paper);}
+  .nav-links a:not(.btn).active{color:var(--brass-hi);}
+  @media (max-width:760px){.nav-links a:not(.btn.primary){display:none;}}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:.5rem;
+    padding:.85rem 1.5rem;
+    border-radius:3px;
+    font-weight:600;
+    font-size:.9375rem;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition:transform 160ms var(--ease-out),background 200ms ease,border-color 200ms ease,color 200ms ease;
+    white-space:nowrap;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn.primary{background:var(--brass);color:var(--ink);}
+  .btn.primary:hover{background:var(--brass-hi);}
+  .btn.ghost{background:transparent;border-color:var(--line-strong);color:var(--paper);}
+  .btn.ghost:hover{border-color:var(--brass);color:var(--brass-hi);}
+  .btn.small{padding:.6rem 1.1rem;font-size:.8125rem;}
+  .btn svg{width:1.05em;height:1.05em;flex:none;}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:clip;border-bottom:1px solid var(--line);}
+  .hero-media{position:absolute;inset:-16% 0 0 0;z-index:0;will-change:transform;}
+  .hero-media img{
+    width:100%;height:116%;object-fit:cover;object-position:50% 24%;
+    animation:heroImgIn 1400ms var(--ease-out) both;
+  }
+  .hero-media::after{
+    content:"";
+    position:absolute;inset:0;
+    background:
+      linear-gradient(180deg,rgba(20,16,13,.55) 0%,rgba(20,16,13,.72) 45%,var(--ink) 96%),
+      linear-gradient(90deg,rgba(20,16,13,.94) 0%,rgba(20,16,13,.45) 55%,rgba(20,16,13,.2) 100%);
+  }
+  .hero-inner{
+    position:relative;z-index:1;
+    padding-block:clamp(7.5rem,18vw,11rem) clamp(4rem,9vw,6rem);
+    max-width:38rem;
+  }
+  .hero-inner .eyebrow{color:var(--brass-hi);}
+  .hero-inner>*{animation:heroIn 750ms var(--ease-out) both;}
+  .hero-inner>.eyebrow{animation-delay:60ms;}
+  .hero-inner>h1{animation-delay:140ms;}
+  .hero-inner>.byline{animation-delay:220ms;}
+  .hero-inner>.tagline{animation-delay:300ms;}
+  .hero-inner>.cta-row{animation-delay:380ms;}
+  .hero-inner>.hero-stats{animation-delay:460ms;}
+  @keyframes heroIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes heroImgIn{from{opacity:0;transform:scale(1.08);}to{opacity:1;transform:scale(1);}}
+  .hero h1{font-size:clamp(3rem,9vw,5.25rem);line-height:.98;}
+  .hero .byline{
+    font-family:'Heebo',sans-serif;
+    font-size:.8125rem;
+    letter-spacing:.22em;
+    color:var(--brass-dim);
+    font-weight:600;
+    margin-block:.85rem 1.35rem;
+  }
+  .hero .tagline{font-size:1.15rem;color:var(--paper-dim);max-width:30rem;}
+  .hero .cta-row{display:flex;flex-wrap:wrap;gap:.9rem;margin-block:2.25rem 2.5rem;}
+  .hero-stats{
+    display:flex;flex-wrap:wrap;
+    gap:1.5rem 2rem;
+    padding-top:1.75rem;
+    border-top:1px solid var(--line);
+  }
+  .hero-stat{display:flex;flex-direction:column;gap:.15rem;}
+  .hero-stat b{font-family:'Frank Ruhl Libre',serif;font-size:1.15rem;color:var(--brass-hi);font-weight:700;}
+  .hero-stat span{font-size:.8125rem;color:var(--paper-faint);}
+
+  /* ---------- services ---------- */
+  .services-list{display:flex;flex-direction:column;}
+  .service-row{
+    display:flex;
+    align-items:flex-end;
+    gap:.75rem;
+    padding-block:1.6rem;
+    padding-inline:.75rem;
+    margin-inline:-.75rem;
+    border-bottom:1px solid var(--line);
+    border-radius:3px;
+    transition:background 220ms ease,transform 220ms var(--ease-out);
+  }
+  @media (hover:hover) and (pointer:fine){
+    .service-row:hover{background:rgba(198,154,75,.06);transform:translateX(4px);}
+  }
+  .service-row:first-child{border-top:1px solid var(--line);}
+  .service-main{display:flex;flex-direction:column;gap:.3rem;}
+  .service-main h3{font-size:1.375rem;font-weight:500;}
+  .service-main small{color:var(--paper-faint);font-size:.875rem;}
+  .service-leader{flex:1 1 auto;border-bottom:1px dotted var(--line-strong);margin-bottom:.5em;min-width:1.5rem;}
+  .service-price{
+    display:flex;align-items:baseline;gap:.5rem;flex:none;
+    font-variant-numeric:tabular-nums;
+  }
+  .service-price b{
+    font-family:'Frank Ruhl Libre',serif;font-size:1.75rem;color:var(--brass-hi);font-weight:700;
+    display:inline-block;transition:transform 220ms var(--ease-out);
+  }
+  .service-row:hover .service-price b{transform:scale(1.06);}
+  .service-price span{font-size:.8125rem;color:var(--paper-faint);}
+  .services-cta{display:flex;justify-content:flex-start;margin-top:2.5rem;}
+
+  /* ---------- gallery ---------- */
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:.6rem;
+  }
+  @media (max-width:760px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+  .gallery-item{
+    position:relative;
+    aspect-ratio:4/5;
+    overflow:clip;
+    border-radius:2px;
+    background:var(--ink-soft);
+  }
+  .gallery-item img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform 500ms var(--ease-in-out),filter 500ms ease;
+  }
+  @media (hover:hover) and (pointer:fine){
+    .gallery-item:hover img{transform:scale(1.06);}
+  }
+  .gallery-item::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 60%,rgba(20,16,13,.55) 100%);
+    opacity:0;transition:opacity 300ms ease;
+  }
+  .gallery-item:hover::after{opacity:1;}
+
+  /* ---------- scroll reveal (per-group stagger, JS-enhanced only) ---------- */
+  .reveal-group.pending>*{opacity:0;transform:translateY(20px);}
+  .reveal-group>*{
+    opacity:1;transform:none;
+    transition:opacity 600ms var(--ease-out),transform 600ms var(--ease-out);
+  }
+  .reveal-group>*:nth-child(1){transition-delay:0ms;}
+  .reveal-group>*:nth-child(2){transition-delay:70ms;}
+  .reveal-group>*:nth-child(3){transition-delay:140ms;}
+  .reveal-group>*:nth-child(4){transition-delay:210ms;}
+  .reveal-group>*:nth-child(5){transition-delay:280ms;}
+  .reveal-group>*:nth-child(6){transition-delay:350ms;}
+  .reveal-group>*:nth-child(7){transition-delay:420ms;}
+  .reveal-group>*:nth-child(8){transition-delay:490ms;}
+  .reveal-group>*:nth-child(9){transition-delay:560ms;}
+  .reveal-group.pending>*{transition-duration:0ms;}
+
+  /* ---------- about ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:14rem 1fr;
+    gap:clamp(2rem,5vw,3.5rem);
+    align-items:center;
+  }
+  @media (max-width:700px){.about-grid{grid-template-columns:1fr;}}
+  .about-portrait{
+    width:100%;
+    aspect-ratio:1;
+    border-radius:50%;
+    overflow:clip;
+    border:1px solid var(--line-strong);
+    justify-self:center;
+    max-width:14rem;
+  }
+  .about-portrait img{width:100%;height:100%;object-fit:cover;}
+  .about-copy p{font-size:1.0625rem;color:var(--paper-dim);max-width:38rem;}
+  .about-copy .chip-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem;}
+  .chip{
+    display:inline-flex;align-items:center;gap:.4rem;
+    padding:.4rem .8rem;
+    border:1px solid var(--line-strong);
+    border-radius:2px;
+    font-size:.8125rem;
+    color:var(--paper-dim);
+  }
+  .chip svg{width:1em;height:1em;color:var(--brass);}
+
+  /* ---------- reviews ---------- */
+  .reviews-card{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:2.5rem;
+    padding:clamp(2rem,5vw,3rem);
+    border:1px solid var(--line);
+    background:linear-gradient(160deg,var(--ink-soft),var(--ink-elevated));
+    border-radius:4px;
+  }
+  .rating-block{display:flex;align-items:center;gap:1.5rem;}
+  .rating-num{font-family:'Frank Ruhl Libre',serif;font-size:clamp(3.5rem,7vw,4.75rem);font-weight:900;color:var(--brass-hi);line-height:1;}
+  .rating-meta{display:flex;flex-direction:column;gap:.5rem;}
+  .stars{display:flex;gap:.2rem;color:var(--brass);}
+  .stars svg{width:1.15rem;height:1.15rem;}
+  .rating-meta span{color:var(--paper-dim);font-size:.9375rem;}
+
+  /* ---------- visit ---------- */
+  .visit-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(1.5rem,4vw,2.5rem);}
+  @media (max-width:760px){.visit-grid{grid-template-columns:1fr;}}
+  .visit-card{
+    border:1px solid var(--line);
+    background:var(--ink-soft);
+    border-radius:4px;
+    padding:clamp(1.5rem,4vw,2.25rem);
+  }
+  .visit-card h3{font-size:1.25rem;font-weight:600;font-family:'Heebo',sans-serif;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+  .status-pill{
+    font-size:.75rem;font-weight:600;padding:.3rem .65rem;border-radius:99px;
+    display:inline-flex;align-items:center;gap:.4rem;
+    background:rgba(241,230,211,.06);color:var(--paper-faint);
+    transition:background 300ms ease,color 300ms ease;
+  }
+  .status-pill.open{background:rgba(198,154,75,.16);color:var(--brass-hi);}
+  .status-pill.closed{background:rgba(241,230,211,.08);color:var(--paper-faint);}
+  .status-pill::before{content:"";width:.4rem;height:.4rem;border-radius:50%;background:currentColor;}
+  .status-pill.open::before{animation:pulseDot 2200ms ease-in-out infinite;}
+  @keyframes pulseDot{0%,100%{opacity:1;}50%{opacity:.35;}}
+  .hours-table{display:flex;flex-direction:column;}
+  .hours-row{
+    display:flex;justify-content:space-between;
+    padding-block:.65rem;
+    border-bottom:1px solid var(--line);
+    font-size:.9375rem;
+    color:var(--paper-dim);
+    font-variant-numeric:tabular-nums;
+  }
+  .hours-row:last-child{border-bottom:none;}
+  .hours-row.today{color:var(--paper);font-weight:600;}
+  .hours-row.today .day{color:var(--brass-hi);}
+  .contact-list{display:flex;flex-direction:column;gap:1rem;}
+  .contact-row{
+    display:flex;align-items:center;gap:.85rem;
+    padding-block:.35rem;
+    transition:transform 200ms var(--ease-out);
+  }
+  .contact-row .ico{
+    flex:none;width:2.4rem;height:2.4rem;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(198,154,75,.12);color:var(--brass);
+    transition:background 200ms ease,color 200ms ease,transform 200ms var(--ease-out);
+  }
+  .contact-row .ico svg{width:1.15rem;height:1.15rem;}
+  .contact-row .txt b{display:block;font-size:.9375rem;font-weight:600;transition:color 160ms ease;}
+  .contact-row .txt span{font-size:.8125rem;color:var(--paper-faint);}
+  @media (hover:hover) and (pointer:fine){
+    a.contact-row:hover{transform:translateX(4px);}
+    a.contact-row:hover .txt b{color:var(--brass-hi);}
+    a.contact-row:hover .ico{background:var(--brass);color:var(--ink);transform:scale(1.06);}
+  }
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line);padding-block:clamp(3rem,6vw,4.5rem) clamp(6rem,8vw,3rem);}
+  .footer-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2.5rem;}
+  .footer-brand p{color:var(--paper-faint);font-size:.875rem;margin-top:.5rem;max-width:20rem;}
+  .footer-links{display:flex;gap:3.5rem;flex-wrap:wrap;}
+  .footer-col h4{font-size:.8125rem;color:var(--paper-faint);font-weight:600;letter-spacing:.06em;margin-bottom:.9rem;}
+  .footer-col ul{display:flex;flex-direction:column;gap:.65rem;}
+  .footer-col a{font-size:.9375rem;color:var(--paper-dim);transition:color 160ms ease;}
+  .footer-col a:hover{color:var(--brass-hi);}
+  .footer-bottom{
+    margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--line);
+    display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;
+    font-size:.8125rem;color:var(--paper-faint);
+  }
+
+  /* ---------- sticky mobile cta ---------- */
+  .mobile-cta{
+    position:fixed;inset-inline:0;bottom:0;z-index:40;
+    display:none;
+    gap:.6rem;
+    padding:.7rem 1rem;
+    padding-bottom:max(.7rem, env(safe-area-inset-bottom));
+    background:rgba(20,16,13,.92);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-top:1px solid var(--line-strong);
+    animation:ctaSlideUp 550ms var(--ease-drawer) 700ms both;
+  }
+  @keyframes ctaSlideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+  .mobile-cta .btn{flex:1;}
+  .mobile-cta .btn.icon-only{flex:none;width:3rem;padding:0;}
+  @media (max-width:760px){.mobile-cta{display:flex;}body{padding-bottom:4.2rem;}}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms !important;transition-duration:.01ms !important;animation-delay:0ms !important;transition-delay:0ms !important;}
+    .reveal-group.pending>*{opacity:1;transform:none;}
+    .hero-media{transform:none !important;}
+  }
+
+  /* ---------- scissors cursor ---------- */
+  @media (hover:hover) and (pointer:fine){
+    html,body,a,button,.btn,.service-row,.gallery-item,.contact-row{cursor:none;}
+  }
+  #barberCursor{
+    position:fixed;top:0;left:0;width:0;height:0;
+    pointer-events:none;z-index:9999;opacity:0;
+    transition:opacity 200ms ease;
+  }
+  #barberCursor.visible{opacity:1;}
+  #barberCursor .cursor-inner{
+    transform:translate(-6px,-27px) scale(1);
+    transition:transform 180ms var(--ease-out);
+    filter:drop-shadow(0 2px 3px rgba(0,0,0,.55));
+  }
+  #barberCursor.hovering .cursor-inner{transform:translate(-6px,-27px) scale(1.22);}
+  #barberCursor .blade{transform-origin:17px 16px;transition:transform 170ms ease-in-out;}
+  #barberCursor .blade-a{transform:rotate(-11deg);}
+  #barberCursor .blade-b{transform:rotate(11deg);}
+  #barberCursor.snip .blade-a{transform:rotate(3deg);}
+  #barberCursor.snip .blade-b{transform:rotate(-3deg);}
+  @media (prefers-reduced-motion:reduce){
+    #barberCursor .blade{transition:none;}
+  }
+  html.a11y-nocursor #barberCursor{display:none !important;}
+  @media (hover:hover) and (pointer:fine){
+    html.a11y-nocursor,html.a11y-nocursor a,html.a11y-nocursor button,html.a11y-nocursor .btn,
+    html.a11y-nocursor .service-row,html.a11y-nocursor .gallery-item,html.a11y-nocursor .contact-row{cursor:auto;}
+  }
+
+  /* ---------- accessibility widget ---------- */
+  :root{--a11y-bottom:1.5rem;}
+  @media (max-width:760px){:root{--a11y-bottom:5.2rem;}}
+  #a11yToggle{
+    position:fixed;left:1rem;bottom:var(--a11y-bottom);z-index:70;
+    width:3rem;height:3rem;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--brass);color:var(--ink);border:none;cursor:pointer;
+    box-shadow:0 4px 14px rgba(0,0,0,.35);
+    transition:transform 160ms var(--ease-out),background 200ms ease;
+  }
+  #a11yToggle:hover{background:var(--brass-hi);}
+  #a11yToggle:active{transform:scale(.94);}
+  #a11yToggle svg{width:1.5rem;height:1.5rem;}
+  #a11yPanel{
+    position:fixed;left:1rem;bottom:calc(var(--a11y-bottom) + 3.75rem);z-index:70;
+    width:min(19rem,calc(100vw - 2rem));
+    background:var(--ink-soft);border:1px solid var(--line-strong);border-radius:8px;
+    padding:1.1rem;box-shadow:0 12px 32px rgba(0,0,0,.45);
+    opacity:0;transform:translateY(10px) scale(.97);pointer-events:none;
+    transition:opacity 200ms var(--ease-out),transform 200ms var(--ease-out);
+  }
+  #a11yPanel.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+  #a11yPanel h4{
+    font-family:'Heebo',sans-serif;font-size:1rem;font-weight:700;margin:0 0 .85rem;
+    display:flex;align-items:center;justify-content:space-between;color:var(--paper);
+  }
+  .a11y-close{background:none;border:none;color:var(--paper-dim);cursor:pointer;padding:.25rem;line-height:0;font-size:1rem;}
+  .a11y-close:hover{color:var(--brass-hi);}
+  .a11y-row{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding-block:.55rem;border-bottom:1px solid var(--line);font-size:.875rem;color:var(--paper-dim);}
+  .a11y-row:last-of-type{border-bottom:none;}
+  .a11y-btnrow{display:flex;gap:.4rem;}
+  .a11y-mini{
+    width:2rem;height:2rem;border-radius:4px;border:1px solid var(--line-strong);
+    background:transparent;color:var(--paper);cursor:pointer;font-size:.8rem;font-weight:700;
+    transition:background 160ms ease,color 160ms ease;
+  }
+  .a11y-mini:hover{background:var(--brass);color:var(--ink);}
+  .a11y-switch{
+    width:2.6rem;height:1.5rem;border-radius:99px;background:rgba(241,230,211,.14);
+    border:1px solid var(--line-strong);position:relative;cursor:pointer;flex:none;padding:0;
+    transition:background 200ms ease;
+  }
+  .a11y-switch::after{
+    content:"";position:absolute;top:1px;right:1px;width:1.2rem;height:1.2rem;border-radius:50%;
+    background:var(--paper-dim);transition:transform 200ms var(--ease-out),background 200ms ease;
+  }
+  .a11y-switch.on{background:var(--brass);}
+  .a11y-switch.on::after{transform:translateX(-1.1rem);background:var(--ink);}
+  #a11yReset{width:100%;margin-top:.9rem;padding:.6rem;border-radius:4px;border:1px solid var(--line-strong);background:transparent;color:var(--paper-dim);font-size:.8125rem;cursor:pointer;transition:border-color 160ms ease,color 160ms ease;}
+  #a11yReset:hover{border-color:var(--brass);color:var(--brass-hi);}
+  .a11y-note{font-size:.6875rem;color:var(--paper-faint);margin:.75rem 0 0;line-height:1.5;}
+
+  html.a11y-contrast{
+    --ink:#000000;--ink-soft:#0a0a0a;--ink-elevated:#111111;--paper:#ffffff;
+    --paper-dim:#f2f2f2;--paper-faint:#cfcfcf;--brass:#ffd400;--brass-hi:#ffe166;
+    --brass-dim:#ffd400;--line:#444444;--line-strong:#666666;
+  }
+  html.a11y-grayscale body{filter:grayscale(1);}
+  html.a11y-underline a{text-decoration:underline !important;text-underline-offset:3px;}
+  html.a11y-readable body{line-height:1.9 !important;letter-spacing:.01em;}
+  html.a11y-readable .lede,html.a11y-readable .tagline,html.a11y-readable .about-copy p,html.a11y-readable small{font-size:1.08em;}
+  html.a11y-stop *{animation:none !important;transition:none !important;}
+
+  /* ---------- links view (linktree-style) ---------- */
+  #linksView{
+    min-height:100vh;
+    background:radial-gradient(60rem 40rem at 50% -10%, rgba(198,154,75,.16), transparent 60%), var(--ink);
+  }
+  .lt-wrap{
+    max-width:26rem;margin-inline:auto;
+    padding:clamp(3rem,10vw,4.5rem) 1.25rem clamp(4.5rem,10vw,5rem);
+    display:flex;flex-direction:column;align-items:center;
+    min-height:100vh;
+  }
+  .lt-avatar{
+    width:6rem;height:6rem;border-radius:50%;overflow:clip;
+    border:1px solid var(--line-strong);box-shadow:0 8px 24px rgba(0,0,0,.4);
+    animation:ltRise 600ms var(--ease-out) both;
+  }
+  .lt-avatar img{width:100%;height:100%;object-fit:cover;}
+  .lt-name{
+    font-family:'Frank Ruhl Libre',"David Libre",serif;font-weight:700;text-wrap:balance;
+    font-size:clamp(1.9rem,7vw,2.3rem);margin:1.1rem 0 0;
+    animation:ltRise 600ms var(--ease-out) 60ms both;
+  }
+  .lt-byline{
+    font-size:.75rem;letter-spacing:.22em;color:var(--brass-dim);font-weight:600;
+    margin:.5rem 0 0;animation:ltRise 600ms var(--ease-out) 120ms both;
+  }
+  .lt-tagline{
+    font-size:.9375rem;color:var(--paper-dim);text-align:center;max-width:22rem;margin:.9rem 0 0;
+    animation:ltRise 600ms var(--ease-out) 180ms both;
+  }
+  .lt-rating{
+    display:flex;align-items:center;gap:.4rem;margin-top:1rem;
+    font-size:.8125rem;color:var(--paper-faint);
+    animation:ltRise 600ms var(--ease-out) 220ms both;
+  }
+  .lt-rating svg{width:1rem;height:1rem;color:var(--brass);}
+  @keyframes ltRise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+  .lt-links{width:100%;display:flex;flex-direction:column;gap:.75rem;margin-top:2.25rem;}
+  .lt-link{
+    display:flex;align-items:center;gap:.9rem;
+    width:100%;padding:.95rem 1.1rem;
+    border-radius:10px;border:1px solid var(--line-strong);
+    background:var(--ink-soft);
+    transition:transform 160ms var(--ease-out),background 200ms ease,border-color 200ms ease;
+    opacity:0;transform:translateY(16px);
+    animation:ltRise 550ms var(--ease-out) forwards;
+  }
+  .lt-link:active{transform:scale(.98);}
+  @media (hover:hover) and (pointer:fine){
+    .lt-link:hover{border-color:var(--brass);background:var(--ink-elevated);}
+    .lt-link:hover .lt-ico{background:var(--brass);color:var(--ink);}
+  }
+  .lt-link.primary{background:var(--brass);border-color:var(--brass);color:var(--ink);}
+  .lt-link.primary .lt-ico{background:rgba(20,16,13,.14);color:var(--ink);}
+  @media (hover:hover) and (pointer:fine){
+    .lt-link.primary:hover{background:var(--brass-hi);border-color:var(--brass-hi);}
+    .lt-link.primary:hover .lt-ico{background:rgba(20,16,13,.2);}
+  }
+  .lt-ico{
+    flex:none;width:2.4rem;height:2.4rem;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(198,154,75,.14);color:var(--brass);
+    transition:background 200ms ease,color 200ms ease;
+  }
+  .lt-ico svg{width:1.15rem;height:1.15rem;}
+  .lt-text{display:flex;flex-direction:column;gap:.1rem;flex:1;min-width:0;}
+  .lt-text b{font-size:.9375rem;font-weight:600;}
+  .lt-text span{font-size:.75rem;color:var(--paper-faint);}
+  .lt-link.primary .lt-text span{color:rgba(20,16,13,.65);}
+  .lt-arrow{flex:none;width:1.1rem;height:1.1rem;color:var(--paper-faint);}
+  .lt-link.primary .lt-arrow{color:rgba(20,16,13,.55);}
+
+  .lt-links .lt-link:nth-child(1){animation-delay:260ms;}
+  .lt-links .lt-link:nth-child(2){animation-delay:320ms;}
+  .lt-links .lt-link:nth-child(3){animation-delay:380ms;}
+  .lt-links .lt-link:nth-child(4){animation-delay:440ms;}
+  .lt-links .lt-link:nth-child(5){animation-delay:500ms;}
+  .lt-links .lt-link:nth-child(6){animation-delay:560ms;}
+
+  .lt-back{
+    margin-top:2.25rem;font-size:.8125rem;color:var(--paper-faint);
+    display:flex;align-items:center;gap:.4rem;transition:color 160ms ease;
+  }
+  .lt-back:hover{color:var(--brass-hi);}
+  .lt-back svg{width:1rem;height:1rem;}
+  .lt-footer{margin-top:auto;padding-top:2.5rem;text-align:center;font-size:.75rem;color:var(--paper-faint);}
+
+  @media (prefers-reduced-motion:reduce){
+    .lt-link{opacity:1;transform:none;}
+  }
+</style>
+
+<!-- custom scissors cursor -->
+<div id="barberCursor" aria-hidden="true">
+  <div class="cursor-inner">
+    <svg width="34" height="32" viewBox="0 0 34 32">
+      <g class="blade blade-a">
+        <circle cx="9" cy="9" r="4.2" fill="none" stroke="#e7c481" stroke-width="2.2"/>
+        <line x1="11.5" y1="11.5" x2="28" y2="27" stroke="#e7c481" stroke-width="2.4" stroke-linecap="round"/>
+      </g>
+      <g class="blade blade-b">
+        <circle cx="9" cy="23" r="4.2" fill="none" stroke="#e7c481" stroke-width="2.2"/>
+        <line x1="11.5" y1="20.5" x2="28" y2="5" stroke="#e7c481" stroke-width="2.4" stroke-linecap="round"/>
+      </g>
+      <circle cx="17" cy="16" r="1.7" fill="#e7c481"/>
+    </svg>
+  </div>
+</div>
+
+<!-- accessibility widget -->
+<button id="a11yToggle" type="button" aria-label="פתיחת תפריט נגישות" aria-expanded="false" aria-controls="a11yPanel">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="4.2" r="1.7" fill="currentColor" stroke="none"/>
+    <path d="M8 9h8"/>
+    <path d="M12 9v3.2"/>
+    <path d="M12 12.2 8 14"/>
+    <path d="M12 12.2l4 1.8"/>
+    <path d="M12 12.2v2.6l3 6.2"/>
+    <path d="M12 14.8l-3 6.2"/>
+  </svg>
+</button>
+<div id="a11yPanel" role="dialog" aria-label="הגדרות נגישות" aria-hidden="true">
+  <h4>נגישות <button class="a11y-close" id="a11yClose" aria-label="סגירת תפריט נגישות">✕</button></h4>
+
+  <div class="a11y-row">
+    <span>גודל טקסט</span>
+    <div class="a11y-btnrow">
+      <button class="a11y-mini" id="a11yDec" type="button" aria-label="הקטנת טקסט">A-</button>
+      <button class="a11y-mini" id="a11yInc" type="button" aria-label="הגדלת טקסט">A+</button>
+    </div>
+  </div>
+  <div class="a11y-row">
+    <span>ניגודיות גבוהה</span>
+    <button class="a11y-switch" type="button" data-key="contrast" role="switch" aria-checked="false" aria-label="ניגודיות גבוהה"></button>
+  </div>
+  <div class="a11y-row">
+    <span>גווני אפור</span>
+    <button class="a11y-switch" type="button" data-key="grayscale" role="switch" aria-checked="false" aria-label="גווני אפור"></button>
+  </div>
+  <div class="a11y-row">
+    <span>הדגשת קישורים</span>
+    <button class="a11y-switch" type="button" data-key="underline" role="switch" aria-checked="false" aria-label="הדגשת קישורים"></button>
+  </div>
+  <div class="a11y-row">
+    <span>טקסט קריא יותר</span>
+    <button class="a11y-switch" type="button" data-key="readable" role="switch" aria-checked="false" aria-label="טקסט קריא יותר"></button>
+  </div>
+  <div class="a11y-row">
+    <span>עצירת אנימציות</span>
+    <button class="a11y-switch" type="button" data-key="stop" role="switch" aria-checked="false" aria-label="עצירת אנימציות"></button>
+  </div>
+  <div class="a11y-row">
+    <span>סמן עכבר רגיל</span>
+    <button class="a11y-switch" type="button" data-key="nocursor" role="switch" aria-checked="false" aria-label="סמן עכבר רגיל במקום סמן המספריים"></button>
+  </div>
+
+  <button id="a11yReset" type="button">איפוס הגדרות</button>
+  <p class="a11y-note">האתר שואף לעמוד בהנחיות הנגישות הישראליות (ת"י 5568, בהתאם ל-WCAG 2.0 AA).</p>
+</div>
+
+<!-- ============ main site view ============ -->
+<div id="siteView">
+
+<!-- nav -->
+<header class="nav" id="siteNav">
+  <div class="container">
+    <a href="#home" class="wordmark">אורי אוליאל <span>ORI OLIEL</span></a>
+    <nav class="nav-links">
+      <a href="#gallery">גלריה</a>
+      <a href="#services">מחירון</a>
+      <a href="#visit">מיקום ושעות</a>
+      <a href="https://biz.uptor.co.il/customer-appointment?companyId=658030004d33db8e88b42588" class="btn primary small" target="_blank" rel="noopener">קביעת תור</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- hero -->
+  <section class="hero" id="home">
+    <div class="hero-media">
+      <img src="images/hero.jpg" alt="אורי אוליאל מבצע תספורת פייד למספרה, אשדוד" />
+    </div>
+    <div class="container">
+      <div class="hero-inner">
+        <p class="eyebrow">מספרת גברים · אשדוד</p>
+        <h1>אורי אוליאל</h1>
+        <p class="byline">O R I &nbsp; O L I E L &nbsp; · &nbsp; B A R B E R</p>
+        <p class="tagline">פייד חד, עיצוב זקן מדויק וסטייל שמתאים בול לך. מספרה אחת, ספר אחד, בלי פשרות על הפרטים.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="https://biz.uptor.co.il/customer-appointment?companyId=658030004d33db8e88b42588" target="_blank" rel="noopener">
+            קביעת תור
+          </a>
+          <a class="btn ghost" href="https://www.instagram.com/ori_oliel/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+            אינסטגרם
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><b data-count-to="5" data-decimals="1" data-suffix=" ★">5.0 ★</b><span>43 ביקורות בגוגל</span></div>
+          <div class="hero-stat"><b data-count-to="1100" data-suffix="+">1,100+</b><span>עוקבים באינסטגרם</span></div>
+          <div class="hero-stat"><b>מדרחוב הנביאים 2</b><span>אשדוד</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="pole-divider" role="presentation"></div>
+
+  <!-- services -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-head reveal-group">
+        <p class="eyebrow">המחירון</p>
+        <h2>שירותים שהם בול בול</h2>
+        <p class="lede">כל תספורת מתחילה בשיחה קצרה על מה שאתה רוצה, וממשיכה עד שהקו יושב מושלם.</p>
+      </div>
+
+      <div class="services-list reveal-group">
+        <div class="service-row">
+          <div class="service-main">
+            <h3>תספורת גבר</h3>
+            <small>פייד, טאפר או עיצוב קלאסי — בהתאמה אישית</small>
+          </div>
+          <span class="service-leader"></span>
+          <div class="service-price"><b>70 ₪</b><span>30 דק׳</span></div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-main">
+            <h3>סידור זקן + מסגרת</h3>
+            <small>קו חד, עיצוב מדויק לצורת הפנים</small>
+          </div>
+          <span class="service-leader"></span>
+          <div class="service-price"><b>30 ₪</b><span>15 דק׳</span></div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-main">
+            <h3>תספורת מספריים ושינוי סגנון</h3>
+            <small>לשיער ארוך שעובר לקצר, בעבודת מספריים איטית ומדויקת</small>
+          </div>
+          <span class="service-leader"></span>
+          <div class="service-price"><b>140 ₪</b><span>שעה</span></div>
+        </div>
+      </div>
+
+      <div class="services-cta">
+        <a class="btn primary" href="https://biz.uptor.co.il/customer-appointment?companyId=658030004d33db8e88b42588" target="_blank" rel="noopener">קביעת תור עכשיו</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- gallery -->
+  <section class="section" id="gallery" style="background:var(--ink-soft);border-block:1px solid var(--line);">
+    <div class="container">
+      <div class="section-head reveal-group">
+        <p class="eyebrow">מהעבודות שלנו</p>
+        <h2>כל תספורת מספרת סיפור</h2>
+        <p class="lede">מבחר מהתספורות שיצאו מהכיסא שלנו לאחרונה — ישר מהאינסטגרם.</p>
+      </div>
+
+      <div class="gallery-grid reveal-group">
+        <div class="gallery-item"><img loading="lazy" src="images/g1.jpg" alt="תספורת פייד, אורי אוליאל ספר גברים"></div>
+        <div class="gallery-item"><img loading="lazy" src="images/g2.jpg" alt="עיצוב תספורת גברים באשדוד"></div>
+        <div class="gallery-item"><img loading="lazy" src="images/g3.jpg" alt="פייד חד, מספרת אורי אוליאל"></div>
+        <div class="gallery-item"><img loading="lazy" src="images/g4.jpg" alt="תספורת גברים מדויקת"></div>
+        <div class="gallery-item"><img loading="lazy" src="images/g5.jpg" alt="עיצוב שיער ופייד באשדוד"></div>
+        <div class="gallery-item"><img loading="lazy" src="images/g6.jpg" alt="תספורת בעבודת מספריים"></div>
+        <div class="gallery-item"><img loading="lazy" src="images/g7.jpg" alt="תספורת גברים בסטייל אישי"></div>
+        <div class="gallery-item"><img loading="lazy" src="images/g8.jpg" alt="פייד נקי, אורי אוליאל"></div>
+        <div class="gallery-item"><img loading="lazy" src="images/g9.jpg" alt="תוצאה סופית של תספורת גברים"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- about -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-head reveal-group">
+        <p class="eyebrow">מי עומד מאחורי המספריים</p>
+        <h2>הכירו את אורי</h2>
+      </div>
+      <div class="about-grid reveal-group">
+        <div class="about-portrait"><img src="images/avatar.jpg" alt="אורי אוליאל, ספר גברים באשדוד"></div>
+        <div class="about-copy">
+          <p>אורי חותך שיער באשדוד כבר שנים, ובנה קהילה של יותר מ־1,100 עוקבים שמגיעים במיוחד אליו. כל תור מתחיל בהקשבה — איזה סגנון, איזה גובה פייד, איזה קו זקן — וממשיך בעבודה סבלנית ומדויקת עד שהתוצאה יושבת נכון. בלי למהר, בלי קיצורי דרך.</p>
+          <div class="chip-row">
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 14.6 9H22l-5.8 4.2L18.6 22 12 17.3 5.4 22l2.4-8.8L2 9h7.4z"/></svg>דירוג מושלם בגוגל</span>
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg>1,100+ עוקבים</span>
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7.5-4.7-9.5-9.1C1 8.3 2.8 5 6.2 5c1.8 0 3.2 1 4 2.3C11 6 12.4 5 14.2 5 17.6 5 19.4 8.3 18 11.9 15.9 16.3 12 21 12 21z"/></svg>שירות אישי, לא רשת</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="pole-divider" role="presentation"></div>
+
+  <!-- reviews -->
+  <section class="section" id="reviews">
+    <div class="container">
+      <div class="section-head reveal-group">
+        <p class="eyebrow">מה אומרים עליו</p>
+        <h2>דירוג מושלם, לא במקרה</h2>
+      </div>
+
+      <div class="reviews-card reveal-group">
+        <div class="rating-block">
+          <span class="rating-num" data-count-to="5" data-decimals="1">5.0</span>
+          <div class="rating-meta">
+            <div class="stars" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 14.6 9H22l-5.8 4.2L18.6 22 12 17.3 5.4 22l2.4-8.8L2 9h7.4z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 14.6 9H22l-5.8 4.2L18.6 22 12 17.3 5.4 22l2.4-8.8L2 9h7.4z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 14.6 9H22l-5.8 4.2L18.6 22 12 17.3 5.4 22l2.4-8.8L2 9h7.4z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 14.6 9H22l-5.8 4.2L18.6 22 12 17.3 5.4 22l2.4-8.8L2 9h7.4z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 14.6 9H22l-5.8 4.2L18.6 22 12 17.3 5.4 22l2.4-8.8L2 9h7.4z"/></svg>
+            </div>
+            <span>43 ביקורות בגוגל</span>
+          </div>
+        </div>
+        <a class="btn primary" href="https://search.google.com/local/writereview?placeid=ChIJUQ-Hj9SjAhUR5LF1CGcNbns" target="_blank" rel="noopener">כתבו ביקורת בגוגל</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- visit -->
+  <section class="section" id="visit" style="background:var(--ink-soft);border-block:1px solid var(--line);">
+    <div class="container">
+      <div class="section-head reveal-group">
+        <p class="eyebrow">מתי ואיפה</p>
+        <h2>בואו לשבת על הכיסא</h2>
+      </div>
+
+      <div class="visit-grid reveal-group">
+        <div class="visit-card">
+          <h3>שעות פעילות <span class="status-pill" id="statusPill">בודק…</span></h3>
+          <div class="hours-table" id="hoursTable">
+            <div class="hours-row" data-day="0"><span class="day">ראשון</span><span>12:00–19:00</span></div>
+            <div class="hours-row" data-day="1"><span class="day">שני</span><span>סגור</span></div>
+            <div class="hours-row" data-day="2"><span class="day">שלישי</span><span>12:00–19:00</span></div>
+            <div class="hours-row" data-day="3"><span class="day">רביעי</span><span>12:00–19:00</span></div>
+            <div class="hours-row" data-day="4"><span class="day">חמישי</span><span>11:00–19:00</span></div>
+            <div class="hours-row" data-day="5"><span class="day">שישי</span><span>9:30–13:00</span></div>
+            <div class="hours-row" data-day="6"><span class="day">שבת</span><span>סגור</span></div>
+          </div>
+        </div>
+
+        <div class="visit-card">
+          <h3>יצירת קשר</h3>
+          <div class="contact-list">
+            <a class="contact-row" href="https://www.google.com/maps/search/?api=1&query=%D7%9E%D7%93%D7%A8%D7%97%D7%95%D7%91%20%D7%94%D7%A0%D7%91%D7%99%D7%90%D7%99%D7%9D%202%2C%20%D7%90%D7%A9%D7%93%D7%95%D7%93" target="_blank" rel="noopener">
+              <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+              <span class="txt"><b>מדרחוב הנביאים 2, אשדוד</b><span>ניווט בגוגל מפות</span></span>
+            </a>
+            <a class="contact-row" href="tel:+972525660810">
+              <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5c0 8.3 6.7 15 15 15l3-4-6-3-2 2c-2.5-1.2-4.3-3-5.5-5.5l2-2-3-6-4 3Z"/></svg></span>
+              <span class="txt"><b>052-566-0810</b><span>חייגו עכשיו</span></span>
+            </a>
+            <a class="contact-row" href="https://wa.me/972525660810" target="_blank" rel="noopener">
+              <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20l1.4-4.6A8 8 0 1 1 9 18.3L4 20Z"/><path d="M8.5 9.5c.4 2.8 2.7 5.1 5.5 5.5" stroke-linecap="round"/></svg></span>
+              <span class="txt"><b>וואטסאפ</b><span>הודעה מהירה לתיאום</span></span>
+            </a>
+            <a class="contact-row" href="https://www.instagram.com/ori_oliel/" target="_blank" rel="noopener">
+              <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></span>
+              <span class="txt"><b>@ori_oliel</b><span>עקבו אחרי העבודות החדשות</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#home" class="wordmark">אורי אוליאל <span>ORI OLIEL</span></a>
+        <p>מספרת גברים באשדוד. פייד חד, עיצוב זקן מדויק, שירות אישי.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>ניווט</h4>
+          <ul>
+            <li><a href="#services">מחירון</a></li>
+            <li><a href="#gallery">גלריה</a></li>
+            <li><a href="#about">עלינו</a></li>
+            <li><a href="#visit">מיקום ושעות</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>יצירת קשר</h4>
+          <ul>
+            <li><a href="tel:+972525660810">052-566-0810</a></li>
+            <li><a href="https://wa.me/972525660810" target="_blank" rel="noopener">וואטסאפ</a></li>
+            <li><a href="https://www.instagram.com/ori_oliel/" target="_blank" rel="noopener">אינסטגרם</a></li>
+            <li><a href="#links" target="_blank" rel="noopener">כל הקישורים</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 אורי אוליאל. כל הזכויות שמורות.</span>
+      <span>מדרחוב הנביאים 2, אשדוד</span>
+    </div>
+  </div>
+</footer>
+
+<!-- sticky mobile cta -->
+<div class="mobile-cta" id="mobileCta">
+  <a class="btn ghost icon-only" href="tel:+972525660810" aria-label="חייגו">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5c0 8.3 6.7 15 15 15l3-4-6-3-2 2c-2.5-1.2-4.3-3-5.5-5.5l2-2-3-6-4 3Z"/></svg>
+  </a>
+  <a class="btn primary" href="https://biz.uptor.co.il/customer-appointment?companyId=658030004d33db8e88b42588" target="_blank" rel="noopener">קביעת תור</a>
+</div>
+
+</div>
+<!-- ============ /main site view ============ -->
+
+<!-- ============ links view (linktree-style) — same page, same domain, reached via #links ============ -->
+<div id="linksView" hidden>
+  <div class="lt-wrap">
+    <div class="lt-avatar"><img src="images/avatar.jpg" alt="אורי אוליאל, ספר גברים באשדוד"></div>
+    <p class="lt-name">אורי אוליאל</p>
+    <p class="lt-byline">O R I &nbsp; O L I E L &nbsp; · &nbsp; B A R B E R</p>
+    <p class="lt-tagline">מספרת גברים באשדוד. פייד חד, עיצוב זקן מדויק, שירות אישי.</p>
+    <div class="lt-rating">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 14.6 9H22l-5.8 4.2L18.6 22 12 17.3 5.4 22l2.4-8.8L2 9h7.4z"/></svg>
+      <span>5.0 · 43 ביקורות בגוגל</span>
+    </div>
+
+    <nav class="lt-links" aria-label="קישורים">
+      <a class="lt-link primary" href="https://biz.uptor.co.il/customer-appointment?companyId=658030004d33db8e88b42588" target="_blank" rel="noopener">
+        <span class="lt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg></span>
+        <span class="lt-text"><b>קביעת תור</b><span>תיאום דרך המערכת שלנו</span></span>
+        <svg class="lt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+      </a>
+
+      <a class="lt-link" href="#home">
+        <span class="lt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9.5a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg></span>
+        <span class="lt-text"><b>האתר המלא</b><span>גלריה, מחירון וכל הפרטים</span></span>
+        <svg class="lt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+      </a>
+
+      <a class="lt-link" href="https://www.instagram.com/ori_oliel/" target="_blank" rel="noopener">
+        <span class="lt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></span>
+        <span class="lt-text"><b>אינסטגרם</b><span>@ori_oliel</span></span>
+        <svg class="lt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+      </a>
+
+      <a class="lt-link" href="https://wa.me/972525660810" target="_blank" rel="noopener">
+        <span class="lt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20l1.4-4.6A8 8 0 1 1 9 18.3L4 20Z"/><path d="M8.5 9.5c.4 2.8 2.7 5.1 5.5 5.5" stroke-linecap="round"/></svg></span>
+        <span class="lt-text"><b>וואטסאפ</b><span>הודעה מהירה לתיאום</span></span>
+        <svg class="lt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+      </a>
+
+      <a class="lt-link" href="https://www.google.com/maps/search/?api=1&query=%D7%9E%D7%93%D7%A8%D7%97%D7%95%D7%91%20%D7%94%D7%A0%D7%91%D7%99%D7%90%D7%99%D7%9D%202%2C%20%D7%90%D7%A9%D7%93%D7%95%D7%93" target="_blank" rel="noopener">
+        <span class="lt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+        <span class="lt-text"><b>ניווט וכתובת</b><span>מדרחוב הנביאים 2, אשדוד</span></span>
+        <svg class="lt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+      </a>
+
+      <a class="lt-link" href="https://search.google.com/local/writereview?placeid=ChIJUQ-Hj9SjAhUR5LF1CGcNbns" target="_blank" rel="noopener">
+        <span class="lt-ico"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2 14.6 9H22l-5.8 4.2L18.6 22 12 17.3 5.4 22l2.4-8.8L2 9h7.4z"/></svg></span>
+        <span class="lt-text"><b>ביקורת בגוגל</b><span>5.0 · 43 ביקורות</span></span>
+        <svg class="lt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+      </a>
+    </nav>
+
+    <a class="lt-back" href="#home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+      לאתר המלא
+    </a>
+
+    <p class="lt-footer">© 2026 אורי אוליאל · אשדוד</p>
+  </div>
+</div>
+<!-- ============ /links view ============ -->
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // single-page router — one URL/domain serves both the site and the links view
+  (function () {
+    const siteView = document.getElementById('siteView');
+    const linksView = document.getElementById('linksView');
+    const mobileCta = document.getElementById('mobileCta');
+    if (!siteView || !linksView) return;
+
+    let wasOnLinks = null;
+    function render() {
+      const onLinks = location.hash === '#links';
+      if (onLinks === wasOnLinks) return; // not a view switch — leave in-page anchor scrolling (e.g. #services) alone
+      wasOnLinks = onLinks;
+      siteView.hidden = onLinks;
+      linksView.hidden = !onLinks;
+      if (mobileCta) mobileCta.style.display = onLinks ? 'none' : '';
+      document.title = onLinks ? 'אורי אוליאל — קישורים' : 'אורי אוליאל';
+      window.scrollTo(0, 0);
+    }
+    render();
+    window.addEventListener('hashchange', render);
+  })();
+
+  // accessibility widget — persisted, keyboard-operable, works with no JS as a graceful no-op
+  (function () {
+    const KEY = 'ori_a11y_prefs_v1';
+    const defaults = { scale: 100, contrast: false, grayscale: false, underline: false, stop: false, readable: false, nocursor: false };
+    let prefs = Object.assign({}, defaults);
+    try {
+      const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+      if (saved) prefs = Object.assign({}, defaults, saved);
+    } catch (e) {}
+
+    const root = document.documentElement;
+    function apply() {
+      root.style.fontSize = prefs.scale + '%';
+      root.classList.toggle('a11y-contrast', prefs.contrast);
+      root.classList.toggle('a11y-grayscale', prefs.grayscale);
+      root.classList.toggle('a11y-underline', prefs.underline);
+      root.classList.toggle('a11y-stop', prefs.stop);
+      root.classList.toggle('a11y-readable', prefs.readable);
+      root.classList.toggle('a11y-nocursor', prefs.nocursor);
+      document.querySelectorAll('.a11y-switch').forEach((el) => {
+        const on = !!prefs[el.dataset.key];
+        el.classList.toggle('on', on);
+        el.setAttribute('aria-checked', on ? 'true' : 'false');
+      });
+    }
+    function save() {
+      try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch (e) {}
+    }
+    apply();
+
+    const toggleBtn = document.getElementById('a11yToggle');
+    const panel = document.getElementById('a11yPanel');
+    function setOpen(open) {
+      panel.classList.toggle('open', open);
+      panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+      toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    if (toggleBtn && panel) {
+      toggleBtn.addEventListener('click', () => setOpen(!panel.classList.contains('open')));
+      document.getElementById('a11yClose')?.addEventListener('click', () => setOpen(false));
+      document.addEventListener('click', (e) => {
+        if (panel.classList.contains('open') && !panel.contains(e.target) && !toggleBtn.contains(e.target)) {
+          setOpen(false);
+        }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && panel.classList.contains('open')) setOpen(false);
+      });
+    }
+
+    document.getElementById('a11yInc')?.addEventListener('click', () => {
+      prefs.scale = Math.min(prefs.scale + 10, 150);
+      apply(); save();
+    });
+    document.getElementById('a11yDec')?.addEventListener('click', () => {
+      prefs.scale = Math.max(prefs.scale - 10, 90);
+      apply(); save();
+    });
+    document.querySelectorAll('.a11y-switch').forEach((el) => {
+      el.addEventListener('click', () => {
+        prefs[el.dataset.key] = !prefs[el.dataset.key];
+        apply(); save();
+      });
+    });
+    document.getElementById('a11yReset')?.addEventListener('click', () => {
+      prefs = Object.assign({}, defaults);
+      apply(); save();
+    });
+  })();
+
+  // scissors cursor — mouse-driven position, hover scale, scroll-tied snip
+  (function () {
+    const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const cursor = document.getElementById('barberCursor');
+    if (!isFinePointer || !cursor) return;
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
+      cursor.classList.add('visible');
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', () => cursor.classList.remove('visible'));
+
+    const HOVER_TARGETS = 'a, button, .service-row, .gallery-item, .contact-row, .lt-link';
+    document.addEventListener('mouseover', (e) => {
+      if (e.target.closest(HOVER_TARGETS)) cursor.classList.add('hovering');
+    });
+    document.addEventListener('mouseout', (e) => {
+      if (e.target.closest(HOVER_TARGETS)) cursor.classList.remove('hovering');
+    });
+
+    if (!reduceMotion) {
+      let traveled = 0;
+      let lastY = window.scrollY;
+      const SNIP_EVERY_PX = 90;
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        traveled += Math.abs(y - lastY);
+        lastY = y;
+        if (traveled >= SNIP_EVERY_PX) {
+          traveled = 0;
+          cursor.classList.add('snip');
+          setTimeout(() => cursor.classList.remove('snip'), 160);
+        }
+      }, { passive: true });
+    }
+  })();
+
+  // nav background on scroll + active-link scrollspy
+  const nav = document.getElementById('siteNav');
+  const navLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+  const spySections = navLinks
+    .map((a) => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+
+  const onScroll = () => {
+    nav.classList.toggle('scrolled', window.scrollY > 8);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  if ('IntersectionObserver' in window && spySections.length) {
+    const spy = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const id = '#' + entry.target.id;
+          navLinks.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === id));
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
+    );
+    spySections.forEach((s) => spy.observe(s));
+  }
+
+  // hero parallax — subtle, scroll-tied, skipped under reduced motion
+  (function () {
+    if (reduceMotion) return;
+    const media = document.querySelector('.hero-media');
+    const hero = document.querySelector('.hero');
+    if (!media || !hero) return;
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const h = hero.offsetHeight;
+      if (window.scrollY > h) return;
+      const shift = Math.min(window.scrollY * 0.15, 70);
+      media.style.transform = 'translateY(' + shift + 'px)';
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+  })();
+
+  // stat count-up — final values already in the markup as fallback if JS/observer is unavailable
+  (function () {
+    const nodes = document.querySelectorAll('[data-count-to]');
+    if (!nodes.length || reduceMotion) return;
+
+    const animate = (el) => {
+      const to = parseFloat(el.getAttribute('data-count-to'));
+      const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      const suffix = el.getAttribute('data-suffix') || '';
+      const duration = 900;
+      const start = performance.now();
+      function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const val = to * eased;
+        el.textContent = val.toLocaleString('en-US', {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals
+        }) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    };
+
+    const heroNodes = document.querySelectorAll('.hero-stat [data-count-to]');
+    window.addEventListener('load', () => setTimeout(() => heroNodes.forEach(animate), 350));
+
+    const belowFoldNodes = document.querySelectorAll('[data-count-to]:not(.hero-stat [data-count-to])');
+    if ('IntersectionObserver' in window && belowFoldNodes.length) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animate(entry.target);
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.6 });
+      belowFoldNodes.forEach((el) => io.observe(el));
+    }
+  })();
+
+  // open/closed status + today highlight (local device time)
+  (function () {
+    const hours = [
+      { open: 12 * 60, close: 19 * 60 },      // ראשון
+      null,                                    // שני
+      { open: 12 * 60, close: 19 * 60 },      // שלישי
+      { open: 12 * 60, close: 19 * 60 },      // רביעי
+      { open: 11 * 60, close: 19 * 60 },      // חמישי
+      { open: 9 * 60 + 30, close: 13 * 60 },  // שישי
+      null                                     // שבת
+    ];
+    const now = new Date();
+    const day = now.getDay();
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    const today = hours[day];
+    const isOpen = !!today && minutes >= today.open && minutes < today.close;
+
+    const row = document.querySelector('.hours-row[data-day="' + day + '"]');
+    if (row) row.classList.add('today');
+
+    const pill = document.getElementById('statusPill');
+    if (pill) {
+      pill.textContent = isOpen ? 'פתוח עכשיו' : 'סגור כרגע';
+      pill.classList.add(isOpen ? 'open' : 'closed');
+    }
+  })();
+
+  // scroll reveal, per section group — enhancement only; content is visible by default
+  (function () {
+    const groups = document.querySelectorAll('.reveal-group');
+    if (!('IntersectionObserver' in window) || !groups.length || reduceMotion) return;
+    groups.forEach((el) => el.classList.add('pending'));
+    requestAnimationFrame(() => {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('pending');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+      groups.forEach((el) => io.observe(el));
+    });
+  })();
+</script>
