@@ -411,36 +411,6 @@
     .hero-media{transform:none !important;}
   }
 
-  /* ---------- scissors cursor ---------- */
-  @media (hover:hover) and (pointer:fine){
-    html,body,a,button,.btn,.service-row,.gallery-item,.contact-row{cursor:none;}
-  }
-  #barberCursor{
-    position:fixed;top:0;left:0;width:0;height:0;
-    pointer-events:none;z-index:9999;opacity:0;
-    transition:opacity 200ms ease;
-  }
-  #barberCursor.visible{opacity:1;}
-  #barberCursor .cursor-inner{
-    transform:translate(-6px,-27px) scale(1);
-    transition:transform 180ms var(--ease-out);
-    filter:drop-shadow(0 2px 3px rgba(0,0,0,.55));
-  }
-  #barberCursor.hovering .cursor-inner{transform:translate(-6px,-27px) scale(1.22);}
-  #barberCursor .blade{transform-origin:17px 16px;transition:transform 170ms ease-in-out;}
-  #barberCursor .blade-a{transform:rotate(-11deg);}
-  #barberCursor .blade-b{transform:rotate(11deg);}
-  #barberCursor.snip .blade-a{transform:rotate(3deg);}
-  #barberCursor.snip .blade-b{transform:rotate(-3deg);}
-  @media (prefers-reduced-motion:reduce){
-    #barberCursor .blade{transition:none;}
-  }
-  html.a11y-nocursor #barberCursor{display:none !important;}
-  @media (hover:hover) and (pointer:fine){
-    html.a11y-nocursor,html.a11y-nocursor a,html.a11y-nocursor button,html.a11y-nocursor .btn,
-    html.a11y-nocursor .service-row,html.a11y-nocursor .gallery-item,html.a11y-nocursor .contact-row{cursor:auto;}
-  }
-
   /* ---------- accessibility widget ---------- */
   :root{--a11y-bottom:1.5rem;}
   @media (max-width:760px){:root{--a11y-bottom:5.2rem;}}
@@ -543,11 +513,11 @@
   .lt-rating svg{width:1rem;height:1rem;color:var(--brass);}
   @keyframes ltRise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 
-  .lt-links{width:100%;display:flex;flex-direction:column;gap:.75rem;margin-top:2.25rem;}
+  .lt-links{width:100%;display:flex;flex-direction:column;gap:.85rem;margin-top:2.25rem;}
   .lt-link{
-    display:flex;align-items:center;gap:.9rem;
-    width:100%;padding:.95rem 1.1rem;
-    border-radius:10px;border:1px solid var(--line-strong);
+    display:flex;align-items:center;gap:1rem;
+    width:100%;padding:1.15rem 1.25rem;
+    border-radius:12px;border:1px solid var(--line-strong);
     background:var(--ink-soft);
     transition:transform 160ms var(--ease-out),background 200ms ease,border-color 200ms ease;
     opacity:0;transform:translateY(16px);
@@ -565,17 +535,17 @@
     .lt-link.primary:hover .lt-ico{background:rgba(20,16,13,.2);}
   }
   .lt-ico{
-    flex:none;width:2.4rem;height:2.4rem;border-radius:50%;
+    flex:none;width:3rem;height:3rem;border-radius:50%;
     display:flex;align-items:center;justify-content:center;
     background:rgba(198,154,75,.14);color:var(--brass);
     transition:background 200ms ease,color 200ms ease;
   }
-  .lt-ico svg{width:1.15rem;height:1.15rem;}
-  .lt-text{display:flex;flex-direction:column;gap:.1rem;flex:1;min-width:0;}
-  .lt-text b{font-size:.9375rem;font-weight:600;}
-  .lt-text span{font-size:.75rem;color:var(--paper-faint);}
+  .lt-ico svg{width:1.4rem;height:1.4rem;}
+  .lt-text{display:flex;flex-direction:column;gap:.2rem;flex:1;min-width:0;}
+  .lt-text b{font-size:1.0625rem;font-weight:600;}
+  .lt-text span{font-size:.875rem;color:var(--paper-faint);}
   .lt-link.primary .lt-text span{color:rgba(20,16,13,.65);}
-  .lt-arrow{flex:none;width:1.1rem;height:1.1rem;color:var(--paper-faint);}
+  .lt-arrow{flex:none;width:1.3rem;height:1.3rem;color:var(--paper-faint);}
   .lt-link.primary .lt-arrow{color:rgba(20,16,13,.55);}
 
   .lt-links .lt-link:nth-child(1){animation-delay:260ms;}
@@ -597,23 +567,6 @@
     .lt-link{opacity:1;transform:none;}
   }
 </style>
-
-<!-- custom scissors cursor -->
-<div id="barberCursor" aria-hidden="true">
-  <div class="cursor-inner">
-    <svg width="34" height="32" viewBox="0 0 34 32">
-      <g class="blade blade-a">
-        <circle cx="9" cy="9" r="4.2" fill="none" stroke="#e7c481" stroke-width="2.2"/>
-        <line x1="11.5" y1="11.5" x2="28" y2="27" stroke="#e7c481" stroke-width="2.4" stroke-linecap="round"/>
-      </g>
-      <g class="blade blade-b">
-        <circle cx="9" cy="23" r="4.2" fill="none" stroke="#e7c481" stroke-width="2.2"/>
-        <line x1="11.5" y1="20.5" x2="28" y2="5" stroke="#e7c481" stroke-width="2.4" stroke-linecap="round"/>
-      </g>
-      <circle cx="17" cy="16" r="1.7" fill="#e7c481"/>
-    </svg>
-  </div>
-</div>
 
 <!-- accessibility widget -->
 <button id="a11yToggle" type="button" aria-label="פתיחת תפריט נגישות" aria-expanded="false" aria-controls="a11yPanel">
@@ -656,10 +609,6 @@
   <div class="a11y-row">
     <span>עצירת אנימציות</span>
     <button class="a11y-switch" type="button" data-key="stop" role="switch" aria-checked="false" aria-label="עצירת אנימציות"></button>
-  </div>
-  <div class="a11y-row">
-    <span>סמן עכבר רגיל</span>
-    <button class="a11y-switch" type="button" data-key="nocursor" role="switch" aria-checked="false" aria-label="סמן עכבר רגיל במקום סמן המספריים"></button>
   </div>
 
   <button id="a11yReset" type="button">איפוס הגדרות</button>
@@ -1015,7 +964,7 @@
   // accessibility widget — persisted, keyboard-operable, works with no JS as a graceful no-op
   (function () {
     const KEY = 'ori_a11y_prefs_v1';
-    const defaults = { scale: 100, contrast: false, grayscale: false, underline: false, stop: false, readable: false, nocursor: false };
+    const defaults = { scale: 100, contrast: false, grayscale: false, underline: false, stop: false, readable: false };
     let prefs = Object.assign({}, defaults);
     try {
       const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
@@ -1030,7 +979,6 @@
       root.classList.toggle('a11y-underline', prefs.underline);
       root.classList.toggle('a11y-stop', prefs.stop);
       root.classList.toggle('a11y-readable', prefs.readable);
-      root.classList.toggle('a11y-nocursor', prefs.nocursor);
       document.querySelectorAll('.a11y-switch').forEach((el) => {
         const on = !!prefs[el.dataset.key];
         el.classList.toggle('on', on);
@@ -1080,44 +1028,6 @@
       prefs = Object.assign({}, defaults);
       apply(); save();
     });
-  })();
-
-  // scissors cursor — mouse-driven position, hover scale, scroll-tied snip
-  (function () {
-    const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    const cursor = document.getElementById('barberCursor');
-    if (!isFinePointer || !cursor) return;
-
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
-      cursor.classList.add('visible');
-    }, { passive: true });
-
-    document.addEventListener('mouseleave', () => cursor.classList.remove('visible'));
-
-    const HOVER_TARGETS = 'a, button, .service-row, .gallery-item, .contact-row, .lt-link';
-    document.addEventListener('mouseover', (e) => {
-      if (e.target.closest(HOVER_TARGETS)) cursor.classList.add('hovering');
-    });
-    document.addEventListener('mouseout', (e) => {
-      if (e.target.closest(HOVER_TARGETS)) cursor.classList.remove('hovering');
-    });
-
-    if (!reduceMotion) {
-      let traveled = 0;
-      let lastY = window.scrollY;
-      const SNIP_EVERY_PX = 90;
-      window.addEventListener('scroll', () => {
-        const y = window.scrollY;
-        traveled += Math.abs(y - lastY);
-        lastY = y;
-        if (traveled >= SNIP_EVERY_PX) {
-          traveled = 0;
-          cursor.classList.add('snip');
-          setTimeout(() => cursor.classList.remove('snip'), 160);
-        }
-      }, { passive: true });
-    }
   })();
 
   // nav background on scroll + active-link scrollspy
