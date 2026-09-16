@@ -24,3 +24,5 @@ images/         — gallery, hero, and avatar photos
 ## Deploying elsewhere
 
 This is a plain static file — drop `index.html` and `images/` onto any static host (GitHub Pages, Vercel, Netlify, S3, etc.) and it works as-is, including the `#links` view, which needs no server-side routing.
+
+Hosted on Cloudflare Pages: https://ori-oliel.com
