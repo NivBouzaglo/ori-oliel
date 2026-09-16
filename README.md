@@ -10,9 +10,23 @@ Single-file static site for a men's barbershop in Ashdod, Israel. Hebrew/RTL, da
 - Single `index.html` — no build step, no dependencies beyond Google Fonts
 - Hero, services/pricing, gallery, about, Google reviews, hours (live open/closed status), location
 - In-page Linktree-style view at `#links` — same file, same domain, no separate deploy
-- Custom scissors cursor that "snips" as you scroll
 - Scroll-reveal animations, live stat count-up, hero parallax
-- Accessibility widget: text scaling, high contrast, grayscale, forced underlines, reduced motion, cursor toggle — preferences persist via `localStorage`
+- Accessibility widget: text scaling, high contrast, grayscale, forced underlines, reduced motion — preferences persist via `localStorage`
+
+## Accessibility
+
+Built and audited for WCAG 2.1 AA / Israeli standard ת"י 5568:
+
+- Skip-to-content link, proper landmark regions (`header`/`nav`/`main`/`footer`), single always-present `<h1>`, no skipped heading levels
+- All text/background color pairs verified ≥4.5:1 contrast (computed, not eyeballed)
+- `lang="en"` on embedded Latin text so screen readers switch voice/pronunciation correctly
+- Every link that opens a new tab announces that to screen readers
+- All decorative icons are `aria-hidden`; the dynamic "open now / closed" status is an `aria-live` region
+- The accessibility panel is properly `inert` and hidden from keyboard/AT when closed (not just visually hidden), returns focus correctly on open/close
+- `forced-colors` (Windows High Contrast Mode) support for all custom controls
+- Full `prefers-reduced-motion` support, plus a manual "stop animations" toggle
+- Scroll-triggered reveal animations have a fail-safe timeout so content can never get stuck hidden
+- Keyboard-operable throughout — no mouse-only interactions
 
 ## Structure
 
