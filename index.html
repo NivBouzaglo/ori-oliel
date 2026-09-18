@@ -501,102 +501,9 @@
   html.a11y-readable .lede,html.a11y-readable .tagline,html.a11y-readable .about-copy p,html.a11y-readable small{font-size:1.08em;}
   html.a11y-stop *{animation:none !important;transition:none !important;}
 
-  /* ---------- links view (linktree-style) ---------- */
-  #linksView{
-    min-height:100vh;
-    background:radial-gradient(60rem 40rem at 50% -10%, rgba(198,154,75,.16), transparent 60%), var(--ink);
-  }
-  .lt-wrap{
-    max-width:26rem;margin-inline:auto;
-    padding:clamp(3rem,10vw,4.5rem) 1.25rem clamp(4.5rem,10vw,5rem);
-    display:flex;flex-direction:column;align-items:center;
-    min-height:100vh;
-  }
-  .lt-avatar{
-    width:6rem;height:6rem;border-radius:50%;overflow:clip;
-    border:1px solid var(--line-strong);box-shadow:0 8px 24px rgba(0,0,0,.4);
-    animation:ltRise 600ms var(--ease-out) both;
-  }
-  .lt-avatar img{width:100%;height:100%;object-fit:cover;}
-  .lt-name{
-    font-family:'Frank Ruhl Libre',"David Libre",serif;font-weight:700;text-wrap:balance;
-    font-size:clamp(1.9rem,7vw,2.3rem);margin:1.1rem 0 0;
-    animation:ltRise 600ms var(--ease-out) 60ms both;
-  }
-  .lt-byline{
-    font-size:.75rem;letter-spacing:.22em;color:var(--brass-dim);font-weight:600;
-    margin:.5rem 0 0;animation:ltRise 600ms var(--ease-out) 120ms both;
-  }
-  .lt-tagline{
-    font-size:.9375rem;color:var(--paper-dim);text-align:center;max-width:22rem;margin:.9rem 0 0;
-    animation:ltRise 600ms var(--ease-out) 180ms both;
-  }
-  .lt-rating{
-    display:flex;align-items:center;gap:.4rem;margin-top:1rem;
-    font-size:.8125rem;color:var(--paper-faint);
-    animation:ltRise 600ms var(--ease-out) 220ms both;
-  }
-  .lt-rating svg{width:1rem;height:1rem;color:var(--brass);}
-  @keyframes ltRise{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
-
-  .lt-links{width:100%;display:flex;flex-direction:column;gap:.85rem;margin-top:2.25rem;}
-  .lt-link{
-    display:flex;align-items:center;gap:1rem;
-    width:100%;padding:1.15rem 1.25rem;
-    border-radius:12px;border:1px solid var(--line-strong);
-    background:var(--ink-soft);
-    transition:transform 160ms var(--ease-out),background 200ms ease,border-color 200ms ease;
-    opacity:0;transform:translateY(16px);
-    animation:ltRise 550ms var(--ease-out) forwards;
-  }
-  .lt-link:active{transform:scale(.98);}
-  @media (hover:hover) and (pointer:fine){
-    .lt-link:hover{border-color:var(--brass);background:var(--ink-elevated);}
-    .lt-link:hover .lt-ico{background:var(--brass);color:var(--ink);}
-  }
-  .lt-link.primary{background:var(--brass);border-color:var(--brass);color:var(--ink);}
-  .lt-link.primary .lt-ico{background:rgba(20,16,13,.14);color:var(--ink);}
-  @media (hover:hover) and (pointer:fine){
-    .lt-link.primary:hover{background:var(--brass-hi);border-color:var(--brass-hi);}
-    .lt-link.primary:hover .lt-ico{background:rgba(20,16,13,.2);}
-  }
-  .lt-ico{
-    flex:none;width:3rem;height:3rem;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    background:rgba(198,154,75,.14);color:var(--brass);
-    transition:background 200ms ease,color 200ms ease;
-  }
-  .lt-ico svg{width:1.4rem;height:1.4rem;}
-  .lt-text{display:flex;flex-direction:column;gap:.2rem;flex:1;min-width:0;}
-  .lt-text b{font-size:1.0625rem;font-weight:600;}
-  .lt-text span{font-size:.875rem;color:var(--paper-faint);}
-  .lt-link.primary .lt-text span{color:rgba(20,16,13,.65);}
-  .lt-arrow{flex:none;width:1.3rem;height:1.3rem;color:var(--paper-faint);}
-  .lt-link.primary .lt-arrow{color:rgba(20,16,13,.55);}
-
-  .lt-links .lt-link:nth-child(1){animation-delay:260ms;}
-  .lt-links .lt-link:nth-child(2){animation-delay:320ms;}
-  .lt-links .lt-link:nth-child(3){animation-delay:380ms;}
-  .lt-links .lt-link:nth-child(4){animation-delay:440ms;}
-  .lt-links .lt-link:nth-child(5){animation-delay:500ms;}
-  .lt-links .lt-link:nth-child(6){animation-delay:560ms;}
-  .lt-links .lt-link:nth-child(7){animation-delay:620ms;}
-
-  .lt-back{
-    margin-top:2.25rem;font-size:.8125rem;color:var(--paper-faint);
-    display:flex;align-items:center;gap:.4rem;transition:color 160ms ease;
-  }
-  .lt-back:hover{color:var(--brass-hi);}
-  .lt-back svg{width:1rem;height:1rem;}
-  .lt-footer{margin-top:auto;padding-top:2.5rem;text-align:center;font-size:.75rem;color:var(--paper-faint);}
-
-  @media (prefers-reduced-motion:reduce){
-    .lt-link{opacity:1;transform:none;}
-  }
-
   /* ---------- forced-colors (Windows High Contrast Mode) ---------- */
   @media (forced-colors:active){
-    .btn,.lt-link,.a11y-switch,.a11y-mini,#a11yToggle,.service-row,.visit-card,.chip,.reviews-card{
+    .btn,.a11y-switch,.a11y-mini,#a11yToggle,.service-row,.visit-card,.chip,.reviews-card{
       border:1px solid CanvasText;
       forced-color-adjust:none;
     }
@@ -658,8 +565,6 @@
 </div>
 
 <!-- ============ main site view ============ -->
-<div id="siteView">
-
 <!-- nav -->
 <header class="nav" id="siteNav">
   <div class="container">
@@ -900,7 +805,7 @@
             <li><a href="https://wa.me/972525660810" target="_blank" rel="noopener">וואטסאפ<span class="sr-only"> (נפתח בכרטיסייה חדשה)</span></a></li>
             <li><a href="https://www.instagram.com/ori_oliel/" target="_blank" rel="noopener">אינסטגרם<span class="sr-only"> (נפתח בכרטיסייה חדשה)</span></a></li>
             <li><a href="https://chat.whatsapp.com/CxjYkrwvfLWEmimVyapIz2" target="_blank" rel="noopener">הקהילה<span class="sr-only"> (נפתח בכרטיסייה חדשה)</span></a></li>
-            <li><a href="#links" target="_blank" rel="noopener">כל הקישורים<span class="sr-only"> (נפתח בכרטיסייה חדשה)</span></a></li>
+            <li><a href="/links" target="_blank" rel="noopener">כל הקישורים<span class="sr-only"> (נפתח בכרטיסייה חדשה)</span></a></li>
           </ul>
         </div>
       </div>
@@ -920,99 +825,8 @@
   <a class="btn primary" href="https://biz.uptor.co.il/customer-appointment?companyId=658030004d33db8e88b42588" target="_blank" rel="noopener">קביעת תור<span class="sr-only"> (נפתח בכרטיסייה חדשה)</span></a>
 </div>
 
-</div>
-<!-- ============ /main site view ============ -->
-
-<!-- ============ links view (linktree-style) — same page, same domain, reached via #links ============ -->
-<div id="linksView" hidden>
-  <div class="lt-wrap">
-    <div class="lt-avatar"><img src="images/avatar.jpg" alt="אורי אוליאל, ספר גברים באשדוד"></div>
-    <h1 class="lt-name">אורי אוליאל</h1>
-    <p class="lt-byline" lang="en">O R I &nbsp; O L I E L &nbsp; · &nbsp; B A R B E R</p>
-    <p class="lt-tagline">מספרת גברים באשדוד. פייד חד, עיצוב זקן מדויק, שירות אישי.</p>
-    <div class="lt-rating">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2 14.6 9H22l-5.8 4.2L18.6 22 12 17.3 5.4 22l2.4-8.8L2 9h7.4z"/></svg>
-      <span>5.0 · 43 ביקורות בגוגל</span>
-    </div>
-
-    <nav class="lt-links" aria-label="קישורים">
-      <a class="lt-link primary" href="https://biz.uptor.co.il/customer-appointment?companyId=658030004d33db8e88b42588" target="_blank" rel="noopener">
-        <span class="lt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg></span>
-        <span class="lt-text"><b>קביעת תור</b><span>תיאום דרך המערכת שלנו</span></span>
-        <svg class="lt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
-      <span class="sr-only"> (נפתח בכרטיסייה חדשה)</span></a>
-
-      <a class="lt-link" href="#home">
-        <span class="lt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9.5a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg></span>
-        <span class="lt-text"><b>האתר המלא</b><span>גלריה, מחירון וכל הפרטים</span></span>
-        <svg class="lt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
-      </a>
-
-      <a class="lt-link" href="https://www.instagram.com/ori_oliel/" target="_blank" rel="noopener">
-        <span class="lt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></span>
-        <span class="lt-text"><b>אינסטגרם</b><span>@ori_oliel</span></span>
-        <svg class="lt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
-      <span class="sr-only"> (נפתח בכרטיסייה חדשה)</span></a>
-
-      <a class="lt-link" href="https://wa.me/972525660810" target="_blank" rel="noopener">
-        <span class="lt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20l1.4-4.6A8 8 0 1 1 9 18.3L4 20Z"/><path d="M8.5 9.5c.4 2.8 2.7 5.1 5.5 5.5" stroke-linecap="round"/></svg></span>
-        <span class="lt-text"><b>וואטסאפ</b><span>הודעה מהירה לתיאום</span></span>
-        <svg class="lt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
-      <span class="sr-only"> (נפתח בכרטיסייה חדשה)</span></a>
-
-      <a class="lt-link" href="https://chat.whatsapp.com/CxjYkrwvfLWEmimVyapIz2" target="_blank" rel="noopener">
-        <span class="lt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.3"/><path d="M15.5 13.2c2.3.3 4 2.4 4 5"/></svg></span>
-        <span class="lt-text"><b>הקהילה</b><span>קבוצת הוואטסאפ של הלקוחות</span></span>
-        <svg class="lt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
-      <span class="sr-only"> (נפתח בכרטיסייה חדשה)</span></a>
-
-      <a class="lt-link" href="https://www.google.com/maps/search/?api=1&query=%D7%9E%D7%93%D7%A8%D7%97%D7%95%D7%91%20%D7%94%D7%A0%D7%91%D7%99%D7%90%D7%99%D7%9D%202%2C%20%D7%90%D7%A9%D7%93%D7%95%D7%93" target="_blank" rel="noopener">
-        <span class="lt-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
-        <span class="lt-text"><b>ניווט וכתובת</b><span>מדרחוב הנביאים 2, אשדוד</span></span>
-        <svg class="lt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
-      <span class="sr-only"> (נפתח בכרטיסייה חדשה)</span></a>
-
-      <a class="lt-link" href="https://search.google.com/local/writereview?placeid=ChIJUQ-Hj9SjAhUR5LF1CGcNbns" target="_blank" rel="noopener">
-        <span class="lt-ico"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M12 2 14.6 9H22l-5.8 4.2L18.6 22 12 17.3 5.4 22l2.4-8.8L2 9h7.4z"/></svg></span>
-        <span class="lt-text"><b>ביקורת בגוגל</b><span>5.0 · 43 ביקורות</span></span>
-        <svg class="lt-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
-      <span class="sr-only"> (נפתח בכרטיסייה חדשה)</span></a>
-    </nav>
-
-    <a class="lt-back" href="#home">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
-      לאתר המלא
-    </a>
-
-    <p class="lt-footer">© 2026 אורי אוליאל · אשדוד</p>
-  </div>
-</div>
-<!-- ============ /links view ============ -->
-
 <script>
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // single-page router — one URL/domain serves both the site and the links view
-  (function () {
-    const siteView = document.getElementById('siteView');
-    const linksView = document.getElementById('linksView');
-    const mobileCta = document.getElementById('mobileCta');
-    if (!siteView || !linksView) return;
-
-    let wasOnLinks = null;
-    function render() {
-      const onLinks = location.hash === '#links';
-      if (onLinks === wasOnLinks) return; // not a view switch — leave in-page anchor scrolling (e.g. #services) alone
-      wasOnLinks = onLinks;
-      siteView.hidden = onLinks;
-      linksView.hidden = !onLinks;
-      if (mobileCta) mobileCta.style.display = onLinks ? 'none' : '';
-      document.title = onLinks ? 'אורי אוליאל — קישורים' : 'אורי אוליאל';
-      window.scrollTo(0, 0);
-    }
-    render();
-    window.addEventListener('hashchange', render);
-  })();
 
   // accessibility widget — persisted, keyboard-operable, works with no JS as a graceful no-op
   (function () {
